@@ -67,8 +67,14 @@ function fetchLeaveRecords() {
                 row.insertCell().textContent = formatDate(record.toDate);
                 row.insertCell().textContent = record.days;
                 row.insertCell().textContent = record.reason;
-                row.insertCell().textContent = record.status;
 
+                 const statusCell = row.insertCell();
+                const statusSpan = document.createElement('span'); // Create <span> element
+                if (record.status === 0) {
+                    statusSpan.textContent = 'Pending';
+                    statusSpan.classList.add('pending'); // Add class for styling
+                } 
+                statusCell.appendChild(statusSpan); 
                 // Action buttons for approving or rejecting leave
                 const actionCell = row.insertCell();
                 const approveButton = document.createElement('button');

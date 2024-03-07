@@ -113,7 +113,7 @@ document.getElementById("apply").addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => {
           var toast = document.getElementById("toast");
-        toast.innerHTML = "Success!";
+        toast.innerHTML = "Request Sent!";
         toast.classList.add("show");
         setTimeout(function(){
             toast.classList.remove("show");

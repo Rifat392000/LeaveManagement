@@ -97,7 +97,7 @@ SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS Pending,
 FROM
   leaveRecord
 WHERE
-  empId = ?;
+  empId = 1003;
   
   
   
@@ -134,3 +134,6 @@ INNER JOIN
     Designation AS D ON E.designationId = D.designationId
 LEFT JOIN 
     Employee AS S ON E.supervisorId = S.empId;
+
+
+
