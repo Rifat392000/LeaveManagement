@@ -169,15 +169,17 @@ app.get('/leaveRecords', (req, res) => {
 
 app.get('/leaveRecordsM', (req, res) => {
     const empId = req.query.empId;
+    const status = req.query.status;
 
     const sqlQuery = `
-    select Lid, leaveTypeId,fromDate,toDate,days,reason,status
-    from leaveRecord
-    where supervisorId=? and status=0;
+    SELECT l.Lid, l.empId AS emp , e.empName, l.leaveTypeId, l.fromDate, l.toDate, l.days, l.reason, l.status
+    FROM leaveRecord l
+    INNER JOIN employee e ON l.empId = e.empId
+    WHERE e.supervisorId = ? AND l.status = ?;
     `;
 
     // Execute the SQL query
-    connection.query(sqlQuery, [empId], (err, results) => {
+    connection.query(sqlQuery, [empId,status], (err, results) => {
         if (err) {
             console.error('Error executing SQL query:', err);
             res.status(500).json({ error: 'Internal Server Error' });

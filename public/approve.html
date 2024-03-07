@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manage Dashboard</title>
+    <title>Approved Requests</title>
     <link rel="stylesheet" href="common.css" />
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
@@ -38,28 +38,10 @@
         font-weight: 300;
       }
 
-      #approveButton {
-        background-color: #09561f;
-        color: white;
-        margin-right: 8px;
-        padding: 2px 3px;
-        border-radius: 2px;
-        font-size: 13px;
-      }
-
-      #rejectButton {
-        background-color: #912020;
-        color: white;
-        padding: 2px 3px;
-        border-radius: 2px;
-        font-size: 13px;
-      }
-
-      .pending {
-        background-color: #fff3cd; /* Light yellow */
-        color: #856404;
+      .accepted {
+        background-color: #d4edda; /* Light green */
+        color: #155724; /* Dark green */
         padding: 0 3px;
-
         font-size: 14px;
         border-radius: 2px;
       }
@@ -128,48 +110,19 @@
 
     <section class="home-section">
       <div class="text">
-        <div class="flex gap-14 items-center mb-8">
-          <div
-            class="w-40 rounded-md flex justify-center items-center gap-3 bg-gray-100 px-2 py-2"
-          >
-            <span
-              id="pending"
-              class="block py-2 px-5 bg-[#fff3cd] text-[#856404] rounded-md text-lg font-medium"
-            ></span>
-            <span>Pending</span>
-          </div>
-          <div
-            class="w-40 rounded-md flex justify-center items-center gap-3 bg-gray-100 px-2 py-2"
-          >
-            <span
-              id="accepted"
-              class="block py-2 px-5 bg-[#d4edda] text-[#155724] rounded-md text-lg font-medium"
-            ></span>
-            <span>Accepted</span>
-          </div>
-          <div
-            class="w-40 rounded-md flex justify-center items-center gap-4 bg-gray-100 px-2 py-2"
-          >
-            <span
-              id="rejected"
-              class="block py-2 px-5 bg-[#edcdcd] text-[#d31212] rounded-md text-lg font-medium"
-            ></span>
-            <span>Rejected </span>
-          </div>
-        </div>
-        <div>
-          <button class="bg-blue-800 px-2 py-1 rounded-[3px] mr-4 text-white" id="ar">
-            Accepted Requests</button
-          ><button class="bg-blue-800 px-2 py-1 rounded-[3px] mr-4 text-white" id="rr">
-            Rejected Requests
-          </button>
-        </div>
 
+        <div>
+            <button class="bg-blue-800 px-2 py-1 rounded-[3px] mr-4 text-white" id="mr">
+              Manage Requests</button
+            ><button class="bg-blue-800 px-2 py-1 rounded-[3px] mr-4 text-white" id="rr">
+              Rejected Requests
+            </button>
+          </div>
         <div class="mt-6 flex justify-between items-center">
-          <h1 class="text-2xl font-medium font-serif">Manage Leaves</h1>
+          <h1 class="text-2xl font-medium font-serif">Accepted Requests</h1>
           <span
             id="refresh"
-            class="bg-violet-800 text-white text-[12px] rounded-[2px] cursor-pointer p-1 text-center mr-1"
+            class="bg-violet-600 text-white text-[12px] rounded-[2px] cursor-pointer p-1 text-center mr-1"
             >Refresh</span
           >
         </div>
@@ -185,7 +138,6 @@
               <th>Number of Days</th>
               <th>Reason</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -217,6 +169,6 @@
         }
       }
     </script>
-    <script src="manage.js"></script>
+    <script src="approve.js"></script>
   </body>
 </html>

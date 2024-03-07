@@ -44,7 +44,7 @@ if (currentUser) {
 }
 
 function fetchLeaveRecords() {
-    fetch(`/leaveRecordsM?empId=${currentUser.empId}&status=0`)
+    fetch(`/leaveRecordsM?empId=${currentUser.empId}&status=1`)
         .then(response => response.json())
         .then(data => {
             // Update the table body with leave records
@@ -72,24 +72,12 @@ function fetchLeaveRecords() {
 
                  const statusCell = row.insertCell();
                 const statusSpan = document.createElement('span'); // Create <span> element
-                if (record.status === 0) {
-                    statusSpan.textContent = 'Pending';
-                    statusSpan.classList.add('pending'); // Add class for styling
+                if (record.status === 1) {
+                    statusSpan.textContent = 'Accepted';
+                    statusSpan.classList.add('accepted'); // Add class for styling
                 } 
                 statusCell.appendChild(statusSpan); 
-                // Action buttons for approving or rejecting leave
-                const actionCell = row.insertCell();
-                const approveButton = document.createElement('button');
-                approveButton.id = 'approveButton'; 
-                approveButton.textContent = 'Approve';
-                approveButton.addEventListener('click', () => approveLeave(record.Lid));
-                actionCell.appendChild(approveButton);
-
-                const rejectButton = document.createElement('button');
-                rejectButton.id = 'rejectButton';
-                rejectButton.textContent = 'Reject';
-                rejectButton.addEventListener('click', () => rejectLeave(record.Lid));
-                actionCell.appendChild(rejectButton);
+               
             });
 
             function formatDate(dateString) {
@@ -100,54 +88,21 @@ function fetchLeaveRecords() {
                 return `${day}-${month}-${year}`;
             }
 
-            // Update aggregate values
-            document.getElementById('pending').textContent = data.leaveAggregates.Pending;
-            document.getElementById('accepted').textContent = data.leaveAggregates.Accepted;
-            document.getElementById('rejected').textContent = data.leaveAggregates.Rejected;
         })
         .catch(error => console.error('Error fetching leave records:', error));
 }
 
 // Function to approve leave
-function approveLeave(leaveId) {
-    updateLeaveStatus(leaveId, 1); // Status code 1 for approved
-}
 
-// Function to reject leave
-function rejectLeave(leaveId) {
-    updateLeaveStatus(leaveId, 2); // Status code 2 for rejected
-}
-
-// Function to update leave status via AJAX
-function updateLeaveStatus(leaveId, status) {
-    fetch('/updateLeaveStatus', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ leaveId, status })
-    })
-    .then(response => {
-        if (response.ok) {
-            fetchLeaveRecords(); // Refresh leave records after status update
-        } else {
-            console.error('Failed to update leave status');
-        }
-    })
-    .catch(error => console.error('Error updating leave status:', error));
-}
-
-// Call the function to fetch and update leave records on page load
 fetchLeaveRecords();
 
 
 document.getElementById('refresh').addEventListener('click', () =>{
-    window.location.href = "manage.html";
+    window.location.href = "approve.html";
 })
 
-
-document.getElementById('ar').addEventListener('click', () =>{
-    window.location.href = "approve.html";
+document.getElementById('mr').addEventListener('click', () =>{
+    window.location.href = "manage.html";
 })
 
 document.getElementById('rr').addEventListener('click', () =>{
