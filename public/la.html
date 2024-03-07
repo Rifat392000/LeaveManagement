@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Requests</title>
+    <link rel="stylesheet" href="common.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon" />
+    <style>
+      hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        padding: 0;
+      }
+
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: green;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+      }
+
+      .toast.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      @-webkit-keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo-details" style="color: white">
+        <div
+          class="logo_name text-white"
+          style="margin-top: 15px; margin-left: 2px; margin-bottom: 8px"
+        >
+          Apptriangle
+          <span style="display: block; margin-top: -3px">Leave Management</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="dashboard.html">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="employees.html">
+            <i class="bx bx-user"></i>
+            <span class="links_name">Employees</span>
+          </a>
+          <span class="tooltip">Employees</span>
+        </li>
+        <li>
+          <a href="requests.html" style="background-color: white">
+            <i class="bx bx-chat" style="color: black"></i>
+            <span class="links_name" style="color: black">Requests</span>
+          </a>
+          <span class="tooltip">Requests</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <img alt="profileImg" class="empImg" />
+            <div class="name_job">
+              <div class="name empName"></div>
+              <div class="job empId"></div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="text">
+        <h1 class="text-[22px] font-medium font-serif mb-2">Leave Request</h1>
+        <hr class="mb-6" />
+
+        <form id="leaveForm">
+          <div class="flex items-center">
+            <!-- From Date -->
+            <label for="fromDate" class="font-serif pr-5 text-lg">From</label>
+            <input
+              type="date"
+              id="fromDate"
+              name="fromDate"
+              value=""
+              min=""
+              required
+              class="border-2 border-[#0c0735] rounded-[3px] px-4"
+            />
+
+            <!-- To Date -->
+            <label for="toDate" class="ml-10 font-serif pr-5 text-lg">To</label>
+            <input
+              type="date"
+              id="toDate"
+              name="toDate"
+              min=""
+              required
+              class="border-2 border-[#0c0735] rounded-[3px] px-4"
+            />
+          </div>
+
+          <div class="mt-8">
+            <!-- Leave Type -->
+            <label for="leaveType" class="font-serif pr-5 text-lg"
+              >Leave Type</label
+            >
+            <select
+              id="leaveType"
+              name="leaveType"
+              class="border-2 border-[#0c0735] rounded-[3px] px-4"
+              required
+            >
+              <option value="1">Personal Leave</option>
+              <option value="2">Sick Leave</option>
+              <option value="3">Casual Leave</option>
+            </select>
+          </div>
+
+          <div class="mt-8">
+            <!-- Reason -->
+            <label for="reason" class="font-serif pr-5 text-lg">Reason</label>
+            <textarea
+              class="block border-2 border-[#0c0735] rounded-md p-2"
+              id="reason"
+              name="reason"
+              rows="4"
+              cols="30"
+              required
+            ></textarea>
+          </div>
+          <div class="mt-4">
+            <!-- Submit and Cancel Buttons -->
+            <button
+              type="button"
+              id="apply"
+              class="bg-green-800 hover:bg-blue-500 text-white text-[14px] px-2 py-1 rounded-[2px]"
+            >
+              Apply
+            </button>
+            <button
+              type="button"
+              id="cancel"
+              class="bg-red-800 ml-1 text-white text-[14px] px-2 py-1 rounded-[2px]"
+            >
+              Cancel
+            </button>
+          </div>
+          <div id="toast" class="toast"></div>
+        </form>
+      </div>
+    </section>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      searchBtn.addEventListener("click", () => {
+        // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+          closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        } else {
+          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        }
+      }
+    </script>
+    <script src="la.js"></script>
+  </body>
+</html>

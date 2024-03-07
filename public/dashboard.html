@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="common.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo-details" style="color: white">
+        <div
+          class="logo_name text-white"
+          style="margin-top: 15px; margin-left: 2px; margin-bottom: 8px"
+        >
+          Apptriangle
+          <span style="display: block; margin-top: -3px">Leave Management</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="dashboard.html" style="background-color: white">
+            <i class="bx bx-grid-alt" style="color: black"></i>
+            <span class="links_name" style="color: black">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="employees.html">
+            <i class="bx bx-user"></i>
+            <span class="links_name">Employees</span>
+          </a>
+          <span class="tooltip">Employees</span>
+        </li>
+        <li>
+          <a href="requests.html">
+            <i class="bx bx-chat"></i>
+            <span class="links_name">Requests</span>
+          </a>
+          <span class="tooltip">Requests</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <img alt="profileImg" class="empImg" />
+            <div class="name_job">
+              <div class="name empName"></div>
+              <div class="job empId"></div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="text">
+        <img src="logo.png" alt="" width="250px" style="padding-left: 5px" />
+        <div
+          style="
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+            padding: 15px 0;
+            padding-left: 20px;
+            width: 100%;
+            border-radius: 3px;
+            color: #31708f;
+            font-weight: 500;
+            margin-top: 28px;
+          "
+        >
+          <span style="font-weight: 700"> Welcome</span> to Apptriangle Ltd !!
+        </div>
+        <div class="mt-8 px-3 py-4 bg-[#0c0735] rounded w-[30%]">
+          <div class="flex items-center gap-3">
+            <img
+              src="niaz.png"
+              alt=""
+              class="w-16 h-16 rounded-full border-2 border-white object-center empImg"
+            />
+            <div>
+              <h4
+                class="font-serif text-xl font-medium text-white empName"
+              ></h4>
+              <p
+                class="font-serif text-[14px] text-white font-medium -mt-1"
+                id="desg"
+              ></p>
+            </div>
+          </div>
+          <table class="mt-4 ml-2 text-[13px] text-white">
+            <tr>
+              <td>Emp Id</td>
+              <td class="pr-4">:</td>
+              <td class="empId"></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>:</td>
+              <td>xyz@apptriangle.com</td>
+            </tr>
+            <tr>
+              <td class="pr-4">Reporting Manager</td>
+              <td>:</td>
+              <td id="supr"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      searchBtn.addEventListener("click", () => {
+        // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+          closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        } else {
+          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        }
+      }
+    </script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Requests</title>
+    <link rel="stylesheet" href="common.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="logo-details" style="color: white">
+        <div
+          class="logo_name text-white"
+          style="margin-top: 15px; margin-left: 2px; margin-bottom: 8px"
+        >
+          Apptriangle
+          <span style="display: block; margin-top: -3px">Leave Management</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="dashboard.html">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="employees.html">
+            <i class="bx bx-user"></i>
+            <span class="links_name">Employees</span>
+          </a>
+          <span class="tooltip">Employees</span>
+        </li>
+        <li>
+          <a href="requests.html" style="background-color: white">
+            <i class="bx bx-chat" style="color: black"></i>
+            <span class="links_name" style="color: black">Requests</span>
+          </a>
+          <span class="tooltip">Requests</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <img alt="profileImg" class="empImg" />
+            <div class="name_job">
+              <div class="name empName"></div>
+              <div class="job empId"></div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="text">
+        <div class="flex gap-5 items-center">
+          <div
+            class="w-40 border-2 bg-red-100 border-black flex justify-center items-center flex-col text-center py-1 rounded-md cursor-pointer"
+            id="manageL"
+          >
+            <img src="manage.png" alt="" class="w-8" />
+            <p class="text-[14px]">Manage Requests</p>
+          </div>
+          <div
+            class="w-40 border-2 bg-green-100 border-black flex justify-center items-center flex-col text-center py-1 rounded-md cursor-pointer"
+            id="leaveL"
+          >
+            <img src="leave.png" alt="" class="w-8" />
+            <p class="text-[14px]">Leave Requests</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      searchBtn.addEventListener("click", () => {
+        // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+          closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        } else {
+          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        }
+      }
+    </script>
+    <script src="request.js"></script>
+  </body>
+</html>

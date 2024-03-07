@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Dashboard</title>
+    <link rel="stylesheet" href="common.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      #employeeTable {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #employeeTable th,
+      #employeeTable td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      #employeeTable th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        background-color: #0c0735;
+        color: white;
+        font-weight: 300;
+      }
+
+      #approveButton {
+        background-color: #35b459;
+        color: white;
+        margin-right: 8px;
+        padding: 2px 3px;
+        border-radius: 2px;
+        font-size: 13px;
+      }
+
+      #rejectButton {
+        background-color: #d42020;
+        color: white;
+        padding: 2px 3px;
+        border-radius: 2px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details" style="color: white">
+        <div
+          class="logo_name text-white"
+          style="margin-top: 15px; margin-left: 2px; margin-bottom: 8px"
+        >
+          Apptriangle
+          <span style="display: block; margin-top: -3px">Leave Management</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="dashboard.html">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="employees.html">
+            <i class="bx bx-user"></i>
+            <span class="links_name">Employees</span>
+          </a>
+          <span class="tooltip">Employees</span>
+        </li>
+        <li>
+          <a href="requests.html" style="background-color: white">
+            <i class="bx bx-chat" style="color: black"></i>
+            <span class="links_name" style="color: black">Requests</span>
+          </a>
+          <span class="tooltip">Requests</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <img alt="profileImg" class="empImg" />
+            <div class="name_job">
+              <div class="name empName"></div>
+              <div class="job empId"></div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
+    </div>
+
+    <section class="home-section">
+      <div class="text">
+        <div class="flex gap-14 items-center mb-8">
+          <div
+            class="w-40 rounded-md flex justify-center items-center gap-3 bg-gray-100 px-2 py-2"
+          >
+            <span
+              id="pending"
+              class="block py-2 px-5 bg-[#fff3cd] text-[#856404] rounded-md text-lg font-medium"
+            ></span>
+            <span>Pending</span>
+          </div>
+          <div
+            class="w-40 rounded-md flex justify-center items-center gap-3 bg-gray-100 px-2 py-2"
+          >
+            <span
+              id="accepted"
+              class="block py-2 px-5 bg-[#d4edda] text-[#155724] rounded-md text-lg font-medium"
+            ></span>
+            <span>Accepted</span>
+          </div>
+          <div
+            class="w-40 rounded-md flex justify-center items-center gap-4 bg-gray-100 px-2 py-2"
+          >
+            <span
+              id="rejected"
+              class="block py-2 px-5 bg-[#edcdcd] text-[#d31212] rounded-md text-lg font-medium"
+            ></span>
+            <span>Rejected </span>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-between items-center">
+          <h1 class="text-2xl font-medium font-serif">Manage Leaves</h1>
+          <span
+            id="refresh"
+            class="bg-violet-600 text-white text-[12px] rounded-[2px] cursor-pointer p-1 text-center mr-1"
+            >Refresh</span
+          >
+        </div>
+        <table id="employeeTable">
+          <thead>
+            <tr>
+              <th>Leave Id</th>
+              <th>Leave Type</th>
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Number of Days</th>
+              <th>Reason</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      searchBtn.addEventListener("click", () => {
+        // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+          closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        } else {
+          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        }
+      }
+    </script>
+    <script src="manage.js"></script>
+  </body>
+</html>
