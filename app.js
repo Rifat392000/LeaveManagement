@@ -42,7 +42,7 @@ app.post('/login', (req, res) => {
         INNER JOIN 
             Designation AS D ON E.designationId = D.designationId
         LEFT JOIN 
-            Employee AS S ON E.supervisorId = S.designationId
+            Employee AS S ON E.supervisorId = S.empId
         WHERE 
             E.empId = ?
             AND E.empPassword = ?;
